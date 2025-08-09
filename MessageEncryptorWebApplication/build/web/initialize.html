@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Initialize Page</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h1>Initialize</h1>
+        <p>Please complete the following information</p>
+        <form action="InitializeServlet.do" method="POST">
+            <table>
+                <tr>
+                    <td>Agent ID:</td>
+                    <td><input name="agentID" type="text" required=""/></td>
+                </tr>
+                <tr>
+                    <td>Agent Name:</td>
+                    <td><input name="agentName" type="text" required=""/></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input value="SUBMIT" type="submit" /></td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>
