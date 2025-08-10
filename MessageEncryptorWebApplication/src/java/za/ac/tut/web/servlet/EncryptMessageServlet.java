@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import za.ac.tut.ejb.bl.*;
 import za.ac.tut.ejb.model.*;
 import za.ac.tut.web.exception.NotEmptyException;
-import za.ac.tut.web.service.ValidateAgent;  // Updated import
+import za.ac.tut.web.service.ValidateAgentInterface;
 
 @WebServlet("/encrypt")
 public class EncryptMessageServlet extends HttpServlet {
@@ -24,7 +24,7 @@ public class EncryptMessageServlet extends HttpServlet {
     private EncryptedmesaagesFacadeLocal emfl;
     
     @EJB 
-    private ValidateAgent validateAgent;  // Now properly references the service package
+    private ValidateAgentInterface validateAgent;  
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -34,7 +34,7 @@ public class EncryptMessageServlet extends HttpServlet {
         
         try {
             String agentID = (String) session.getAttribute("agentID");
-            String plaintext = request.getParameter("plaintext");
+            String plaintext = request.getParameter("plaintext").trim().toLowerCase();
             
             validateAgent.validateMessage(plaintext);
             String cyphertext = encryptMessage(plaintext);
@@ -56,7 +56,7 @@ public class EncryptMessageServlet extends HttpServlet {
             request.getRequestDispatcher("encrypted_message_outcome.jsp").forward(request, response);
             
         } catch (NotEmptyException ex) {
-            session.setAttribute("error", "User Not Empty Error: " + ex.getMessage());
+            session.setAttribute("error", "Textarea Not Empty Error: " + ex.getMessage());
             request.getRequestDispatcher("error_not_empty_outcom.jsp").forward(request, response);
         }
     }
@@ -74,7 +74,6 @@ public class EncryptMessageServlet extends HttpServlet {
             } else if (Character.isDigit(currentChar)) {
                 cyphertext.append(currentChar);
             } else {
-                
                 cyphertext.append(currentChar);
             }
         }
