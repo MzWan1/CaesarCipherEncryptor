@@ -18,15 +18,11 @@ public class InitializeServlet extends HttpServlet {
     @EJB
     private ValidateAgentInterface validateAgent;  
 
-    public InitializeServlet() {
-        System.out.println("InitializeServlet constructor called. Instance: " + this);
-    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        System.out.println("doPost called. Instance: " + this);
 
         HttpSession session = request.getSession(true);
         String agentID = request.getParameter("agentID").trim();
