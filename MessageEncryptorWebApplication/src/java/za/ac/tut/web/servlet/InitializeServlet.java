@@ -15,8 +15,7 @@ import za.ac.tut.web.service.ValidateAgentInterface;
 @WebServlet("/initialize")
 public class InitializeServlet extends HttpServlet {
 
-    @EJB
-    private ValidateAgentInterface validateAgent;  
+    private ValidateAgentInterface validateAgent = new za.ac.tut.web.service.ValidateAgents();
 
 
     @Override

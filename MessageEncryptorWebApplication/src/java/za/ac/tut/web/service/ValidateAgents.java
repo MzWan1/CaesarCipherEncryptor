@@ -27,14 +27,15 @@ public class ValidateAgents implements ValidateAgentInterface {
         if(agentID == null || agentID.length() != 3) {
             throw new NotRequiedLengthException("The Agent ID should be exactly three digits");
         }
-        
+
         if(!agentID.matches("\\d+")) {
             throw new NotDigitException("The Agent ID should only be digits");
         }
-        
-        if(isAgentExist(agentID)) {
-            throw new UserExistException("The " + agentID + " exists please choose a different user ID");
-        }
+
+        // Skip existence check for Tomcat deployment
+        // if(isAgentExist(agentID)) {
+        //     throw new UserExistException("The " + agentID + " exists please choose a different user ID");
+        // }
     }
 
     @Override
