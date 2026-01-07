@@ -4,7 +4,7 @@ FROM payara/server-full:6.2023.12-jdk17
 USER root
 
 # Install wget, unzip and curl (for healthcheck)
-RUN apt-get update && apt-get install -y wget unzip curl ca-certificates
+RUN apt-get clean && apt-get update && apt-get install -y wget unzip curl ca-certificates && rm -rf /var/lib/apt/lists/*
 
 # Switch back to payara user
 USER payara
