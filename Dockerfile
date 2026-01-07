@@ -13,14 +13,11 @@ USER payara
 COPY apache-ant.zip /tmp/
 RUN cd /tmp && unzip apache-ant.zip
 
-# Download the CopyLibs task jar
-RUN wget https://raw.githubusercontent.com/apache/netbeans/master/java/ant/extra/org-netbeans-modules-java-j2seproject-copylibstask.jar -O /tmp/copylibstask.jar
-
 # Build the EJB module
-RUN /tmp/apache-ant-1.10.14/bin/ant -f MessageEncryptorEJBModule/build.xml -Dlibs.CopyLibs.classpath=/tmp/copylibstask.jar
+RUN /tmp/apache-ant-1.10.14/bin/ant -f MessageEncryptorEJBModule/build.xml
 
 # Build the web application
-RUN /tmp/apache-ant-1.10.14/bin/ant -f MessageEncryptorWebApplication/build.xml -Dlibs.CopyLibs.classpath=/tmp/copylibstask.jar
+RUN /tmp/apache-ant-1.10.14/bin/ant -f MessageEncryptorWebApplication/build.xml
 
 # Copy the built EJB module
 COPY MessageEncryptorEJBModule/dist/MessageEncryptorEJBModule.jar /opt/payara/deployments/
