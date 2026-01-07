@@ -1,9 +1,4 @@
 services:
   - type: web
     name: caesar-cipher-encryptor
-    runtime: java
-    buildCommand: ant -f MessageEncryptorWebApplication/build.xml clean compile
-    startCommand: java -jar MessageEncryptorWebApplication/dist/MessageEncryptorWebApplication.war
-    envVars:
-      - key: JAVA_VERSION
-        value: 11
+    runtime: docker
