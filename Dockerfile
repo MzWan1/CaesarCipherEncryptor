@@ -6,5 +6,8 @@ COPY MessageEncryptorWebApplication/dist/MessageEncryptorWebApplication.war /opt
 # Expose port
 EXPOSE 8080
 
-# Set JVM options and start Payara
-CMD ["asadmin", "create-jvm-options", "-Dorg.glassfish.grizzly.nio.DefaultSelectorHandler.force-selector-spin-detection=true", "&&", "asadmin", "start-domain", "--verbose"]
+# Create a startup script
+RUN echo '#!/bin/bash\nasadmin start-domain --verbose --jvmoptions="-Dorg.glassfish.grizzly.nio.DefaultSelectorHandler.force-selector-spin-detection=true"' > /opt/payara/start.sh && chmod +x /opt/payara/start.sh
+
+# Start Payara with JVM options
+CMD ["/opt/payara/start.sh"]
