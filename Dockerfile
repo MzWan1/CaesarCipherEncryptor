@@ -6,5 +6,5 @@ COPY MessageEncryptorWebApplication/dist/MessageEncryptorWebApplication.war /opt
 # Expose port
 EXPOSE 8080
 
-# Start Payara
-CMD ["asadmin", "start-domain", "--verbose"]
+# Set JVM options and start Payara
+CMD ["asadmin", "create-jvm-options", "-Dorg.glassfish.grizzly.nio.DefaultSelectorHandler.force-selector-spin-detection=true", "&&", "asadmin", "start-domain", "--verbose"]
