@@ -17,14 +17,13 @@ import za.ac.tut.web.service.ValidateAgentInterface;
 @WebServlet("/encrypt")
 public class EncryptMessageServlet extends HttpServlet {
 
-    @EJB 
+    @EJB
     private UsersFacadeLocal ufl;
+
+    @EJB
+    private EncryptedmessagesFacadeLocal emfl;
     
-    @EJB 
-    private EncryptedmesaagesFacadeLocal emfl;
-    
-    @EJB 
-    private ValidateAgentInterface validateAgent;  
+    private ValidateAgentInterface validateAgent = new za.ac.tut.web.service.ValidateAgents();
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -45,9 +44,9 @@ public class EncryptMessageServlet extends HttpServlet {
                 user = new Users(agentID);
                 ufl.create(user);
             }
-      
-            
-            Encryptedmesaages message = new Encryptedmesaages(cyphertext, datecreated, user);
+
+
+            Encryptedmessages message = new Encryptedmessages(cyphertext, datecreated, user);
             emfl.create(message);
             
             session.setAttribute("agentID", agentID);
@@ -57,7 +56,7 @@ public class EncryptMessageServlet extends HttpServlet {
             
         } catch (NotEmptyException ex) {
             session.setAttribute("error", "Textarea Not Empty Error: " + ex.getMessage());
-            request.getRequestDispatcher("error_not_empty_outcom.jsp").forward(request, response);
+            request.getRequestDispatcher("error_not_empty_outcome.jsp").forward(request, response);
         }
     }
 

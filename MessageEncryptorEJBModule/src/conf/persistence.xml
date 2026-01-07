@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="MessageEncryptorEJBModulePU" transaction-type="JTA">
-    <jta-data-source>jdbc/__default</jta-data-source>
-    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <provider>org.hibernate.ogm.jpa.HibernateOgmPersistence</provider>
     <properties>
+      <property name="hibernate.ogm.datastore.provider" value="MONGODB"/>
+      <property name="hibernate.ogm.datastore.database" value="messageEncryptor"/>
+      <property name="hibernate.ogm.datastore.host" value="cluster0.3f6xqzx.mongodb.net"/>
+      <property name="hibernate.ogm.datastore.port" value="27017"/>
+      <property name="hibernate.ogm.datastore.username" value="system"/>
+      <property name="hibernate.ogm.datastore.password" value="123"/>
+      <property name="hibernate.ogm.mongodb.connection_timeout" value="30000"/>
+      <property name="hibernate.ogm.mongodb.socket_timeout" value="30000"/>
       <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
     </properties>
   </persistence-unit>

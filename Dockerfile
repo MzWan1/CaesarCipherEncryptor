@@ -1,10 +1,10 @@
-FROM tomcat:9-jdk17-openjdk
+FROM payara/server-full:6.2023.12-jdk17
 
 # Copy the built web application
-COPY MessageEncryptorWebApplication/build/web /usr/local/tomcat/webapps/ROOT
+COPY MessageEncryptorWebApplication/dist/MessageEncryptorWebApplication.war /opt/payara/deployments/
 
 # Expose port
 EXPOSE 8080
 
-# Start Tomcat
-CMD ["catalina.sh", "run"]
+# Start Payara
+CMD ["asadmin", "start-domain", "--verbose"]

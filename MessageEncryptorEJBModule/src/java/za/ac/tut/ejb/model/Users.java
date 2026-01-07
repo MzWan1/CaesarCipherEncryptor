@@ -41,7 +41,7 @@ public class Users implements Serializable {
     @Column(nullable = false, length = 25)
     private String agentid;
     @OneToMany(mappedBy = "agentidFk")
-    private List<Encryptedmesaages> encryptedmesaagesList;
+    private List<Encryptedmessages> encryptedmessagesList;
 
     public Users() {
     }
@@ -59,12 +59,12 @@ public class Users implements Serializable {
     }
 
     @XmlTransient
-    public List<Encryptedmesaages> getEncryptedmesaagesList() {
-        return encryptedmesaagesList;
+    public List<Encryptedmessages> getEncryptedmessagesList() {
+        return encryptedmessagesList;
     }
 
-    public void setEncryptedmesaagesList(List<Encryptedmesaages> encryptedmesaagesList) {
-        this.encryptedmesaagesList = encryptedmesaagesList;
+    public void setEncryptedmessagesList(List<Encryptedmessages> encryptedmessagesList) {
+        this.encryptedmessagesList = encryptedmessagesList;
     }
 
     @Override
@@ -76,15 +76,18 @@ public class Users implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Users)) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
             return false;
         }
         Users other = (Users) object;
-        if ((this.agentid == null && other.agentid != null) || (this.agentid != null && !this.agentid.equals(other.agentid))) {
+        // If either id is null, treat as not equal (transient entities)
+        if (this.agentid == null || other.agentid == null) {
             return false;
         }
-        return true;
+        return this.agentid.equals(other.agentid);
     }
 
     @Override

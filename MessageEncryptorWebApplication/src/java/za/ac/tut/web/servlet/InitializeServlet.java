@@ -1,7 +1,6 @@
 package za.ac.tut.web.servlet;
 
 import java.io.IOException;
-import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,15 +34,15 @@ public class InitializeServlet extends HttpServlet {
 
             request.getRequestDispatcher("welcome_outcome.jsp").forward(request, response);
 
-        } catch (NotRequiedLengthException ex) {
+        } catch (NotRequiredLengthException ex) {
             session.setAttribute("error", "Length Error: " + ex.getMessage());
-            request.getRequestDispatcher("error_length_outcom.jsp").forward(request, response);
+            request.getRequestDispatcher("error_length_outcome.jsp").forward(request, response);
         } catch (NotDigitException ex) {
             session.setAttribute("error", "Not Digit Error: " + ex.getMessage());
-            request.getRequestDispatcher("error_not_digit_outcom.jsp").forward(request, response);
+            request.getRequestDispatcher("error_not_digit_outcome.jsp").forward(request, response);
         } catch (UserExistException ex) {
             session.setAttribute("error", "User Exist Error: " + ex.getMessage());
-            request.getRequestDispatcher("error_user_exist_outcom.jsp").forward(request, response);
+            request.getRequestDispatcher("error_user_exist_outcome.jsp").forward(request, response);
         }
     }
 

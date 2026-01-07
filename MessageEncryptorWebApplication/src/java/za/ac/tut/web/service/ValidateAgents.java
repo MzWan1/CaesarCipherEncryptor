@@ -9,10 +9,9 @@ package za.ac.tut.web.service;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import za.ac.tut.ejb.bl.UsersFacadeLocal;
-import za.ac.tut.ejb.model.Users;
 import za.ac.tut.web.exception.NotDigitException;
 import za.ac.tut.web.exception.NotEmptyException;
-import za.ac.tut.web.exception.NotRequiedLengthException;
+import za.ac.tut.web.exception.NotRequiredLengthException;
 import za.ac.tut.web.exception.UserExistException;
 
 @Stateless
@@ -23,9 +22,9 @@ public class ValidateAgents implements ValidateAgentInterface {
     private UsersFacadeLocal ufl;
     
     @Override
-    public void validateAgentID(String agentID) throws NotRequiedLengthException, NotDigitException, UserExistException {
+    public void validateAgentID(String agentID) throws NotRequiredLengthException, NotDigitException, UserExistException {
         if(agentID == null || agentID.length() != 3) {
-            throw new NotRequiedLengthException("The Agent ID should be exactly three digits");
+            throw new NotRequiredLengthException("The Agent ID should be exactly three digits");
         }
 
         if(!agentID.matches("\\d+")) {
@@ -43,10 +42,5 @@ public class ValidateAgents implements ValidateAgentInterface {
         if(plaintext == null || plaintext.trim().isEmpty()) {
             throw new NotEmptyException("The text area must not be empty");
         }
-    }
-    
-    private boolean isAgentExist(String agentID) {
-        Users user = ufl.find(agentID);
-        return user != null;
     }
 }

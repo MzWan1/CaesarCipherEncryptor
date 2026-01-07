@@ -9,30 +9,30 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import za.ac.tut.ejb.bl.EncryptedmesaagesFacadeLocal;
-import za.ac.tut.ejb.model.Encryptedmesaages;
+import za.ac.tut.ejb.bl.EncryptedmessagesFacadeLocal;
+import za.ac.tut.ejb.model.Encryptedmessages;
 
 public class ViewAllDecryptedMessagesServlet extends HttpServlet {
 
-    @EJB 
-    private EncryptedmesaagesFacadeLocal emfl;
+    @EJB
+    private EncryptedmessagesFacadeLocal emfl;
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
         HttpSession session = request.getSession();
-        List<Encryptedmesaages> encryptedMessages = emfl.findAll();
+        List<Encryptedmessages> encryptedMessages = emfl.findAll();
         List<String> decryptedMessages = decryptMessages(encryptedMessages);
         
         session.setAttribute("decryptedMessageList", decryptedMessages);
         request.getRequestDispatcher("view_all_decrypted_messages_outcome.jsp").forward(request, response);
     }
     
-    private List<String> decryptMessages(List<Encryptedmesaages> encryptedMessages) {
+    private List<String> decryptMessages(List<Encryptedmessages> encryptedMessages) {
         List<String> decryptedMessages = new ArrayList<>();
-        
-        for (Encryptedmesaages message : encryptedMessages) {
+
+        for (Encryptedmessages message : encryptedMessages) {
             String decryptedText = decrypt(message.getCyphertext());
             decryptedMessages.add(decryptedText);
         }

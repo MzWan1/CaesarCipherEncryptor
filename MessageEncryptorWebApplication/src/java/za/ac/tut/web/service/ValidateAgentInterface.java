@@ -6,10 +6,9 @@
 package za.ac.tut.web.service;
 
 import javax.ejb.Local;
-import javax.ejb.Remote;
 import za.ac.tut.web.exception.NotDigitException;
 import za.ac.tut.web.exception.NotEmptyException;
-import za.ac.tut.web.exception.NotRequiedLengthException;
+import za.ac.tut.web.exception.NotRequiredLengthException;
 import za.ac.tut.web.exception.UserExistException;
 
 /**
@@ -18,6 +17,6 @@ import za.ac.tut.web.exception.UserExistException;
  */
 @Local
 public interface ValidateAgentInterface {
-    public void validateAgentID(String agentID) throws NotRequiedLengthException, NotDigitException, UserExistException;
+    public void validateAgentID(String agentID) throws NotRequiredLengthException, NotDigitException, UserExistException;
     public void validateMessage(String plaintext) throws NotEmptyException;
 }
