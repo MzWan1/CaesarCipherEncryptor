@@ -31,9 +31,12 @@ EXPOSE 8080 8181 4848 8686
 # Set JVM options environment variable and enable OpenTelemetry auto-config
 ENV PAYARA_JAVA_OPTS="-Dorg.glassfish.grizzly.nio.DefaultSelectorHandler.force-selector-spin-detection=true -Dotel.java.global-autoconfigure.enabled=true"
 
+# Create startup script to set port and start domain
+RUN echo '#!/bin/bash\nasadmin set server.network-config.network-listeners.network-listener.http-listener-1.port=$PORT\nasadmin start-domain --verbose' > /opt/payara/start.sh && chmod +x /opt/payara/start.sh
+
 # Simple Docker healthcheck that retries until Payara responds on root context
 HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
-  CMD curl -f http://localhost:8080/ || exit 1
+  CMD curl -f http://localhost:$PORT/ || exit 1
 
-# Start Payara
-CMD ["asadmin", "start-domain", "--verbose"]
+# Start Payara with port configuration
+CMD ["/opt/payara/start.sh"]
